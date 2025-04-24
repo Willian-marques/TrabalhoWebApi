@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\gabri\\Desktop\\Git\\Trabalho-API-web\\ApiTarefas\\ApiTarefas.csproj": {}
+    "C:\\Users\\willi\\Desktop\\Trabalho-API-web\\ApiTarefas\\ApiTarefas.csproj": {}
   },
   "projects": {
-    "C:\\Users\\gabri\\Desktop\\Git\\Trabalho-API-web\\ApiTarefas\\ApiTarefas.csproj": {
+    "C:\\Users\\willi\\Desktop\\Trabalho-API-web\\ApiTarefas\\ApiTarefas.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\gabri\\Desktop\\Git\\Trabalho-API-web\\ApiTarefas\\ApiTarefas.csproj",
+        "projectUniqueName": "C:\\Users\\willi\\Desktop\\Trabalho-API-web\\ApiTarefas\\ApiTarefas.csproj",
         "projectName": "ApiTarefas",
-        "projectPath": "C:\\Users\\gabri\\Desktop\\Git\\Trabalho-API-web\\ApiTarefas\\ApiTarefas.csproj",
-        "packagesPath": "C:\\Users\\gabri\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\gabri\\Desktop\\Git\\Trabalho-API-web\\ApiTarefas\\obj\\",
+        "projectPath": "C:\\Users\\willi\\Desktop\\Trabalho-API-web\\ApiTarefas\\ApiTarefas.csproj",
+        "packagesPath": "C:\\Users\\willi\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\willi\\Desktop\\Trabalho-API-web\\ApiTarefas\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\gabri\\AppData\\Roaming\\NuGet\\NuGet.Config"
+          "C:\\Users\\willi\\AppData\\Roaming\\NuGet\\NuGet.Config"
         ],
         "originalTargetFrameworks": [
           "net8.0"
@@ -37,8 +37,7 @@
           "enableAudit": "true",
           "auditLevel": "low",
           "auditMode": "direct"
-        },
-        "SdkAnalysisLevel": "9.0.200"
+        }
       },
       "frameworks": {
         "net8.0": {
@@ -47,6 +46,20 @@
             "Microsoft.AspNetCore.OpenApi": {
               "target": "Package",
               "version": "[8.0.15, )"
+            },
+            "Microsoft.EntityFrameworkCore": {
+              "target": "Package",
+              "version": "[9.0.4, )"
+            },
+            "Microsoft.EntityFrameworkCore.Design": {
+              "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[9.0.4, )"
+            },
+            "Microsoft.EntityFrameworkCore.Sqlite": {
+              "target": "Package",
+              "version": "[9.0.4, )"
             },
             "Swashbuckle.AspNetCore": {
               "target": "Package",
@@ -72,7 +85,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.203/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.408/PortableRuntimeIdentifierGraph.json"
         }
       }
     }
