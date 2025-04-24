@@ -32,3 +32,40 @@ c:\Users\matheus npj\Desktop\Trabalho-API-web\ApiTarefas\obj\Debug\net8.0\refint
 c:\Users\matheus npj\Desktop\Trabalho-API-web\ApiTarefas\obj\Debug\net8.0\ApiTarefas.pdb
 C:\Users\matheus npj\Desktop\Trabalho-API-web\ApiTarefas\obj\Debug\net8.0\ApiTarefas.genruntimeconfig.cache
 C:\Users\matheus npj\Desktop\Trabalho-API-web\ApiTarefas\obj\Debug\net8.0\ref\ApiTarefas.dll
+C:\Users\gabri\Desktop\Git\Trabalho-API-web\ApiTarefas\bin\Debug\net8.0\appsettings.Development.json
+C:\Users\gabri\Desktop\Git\Trabalho-API-web\ApiTarefas\bin\Debug\net8.0\appsettings.json
+C:\Users\gabri\Desktop\Git\Trabalho-API-web\ApiTarefas\bin\Debug\net8.0\ApiTarefas.staticwebassets.endpoints.json
+C:\Users\gabri\Desktop\Git\Trabalho-API-web\ApiTarefas\bin\Debug\net8.0\ApiTarefas.exe
+C:\Users\gabri\Desktop\Git\Trabalho-API-web\ApiTarefas\bin\Debug\net8.0\ApiTarefas.deps.json
+C:\Users\gabri\Desktop\Git\Trabalho-API-web\ApiTarefas\bin\Debug\net8.0\ApiTarefas.runtimeconfig.json
+C:\Users\gabri\Desktop\Git\Trabalho-API-web\ApiTarefas\bin\Debug\net8.0\ApiTarefas.dll
+C:\Users\gabri\Desktop\Git\Trabalho-API-web\ApiTarefas\bin\Debug\net8.0\ApiTarefas.pdb
+C:\Users\gabri\Desktop\Git\Trabalho-API-web\ApiTarefas\bin\Debug\net8.0\Microsoft.AspNetCore.OpenApi.dll
+C:\Users\gabri\Desktop\Git\Trabalho-API-web\ApiTarefas\bin\Debug\net8.0\Microsoft.OpenApi.dll
+C:\Users\gabri\Desktop\Git\Trabalho-API-web\ApiTarefas\bin\Debug\net8.0\Swashbuckle.AspNetCore.Swagger.dll
+C:\Users\gabri\Desktop\Git\Trabalho-API-web\ApiTarefas\bin\Debug\net8.0\Swashbuckle.AspNetCore.SwaggerGen.dll
+C:\Users\gabri\Desktop\Git\Trabalho-API-web\ApiTarefas\bin\Debug\net8.0\Swashbuckle.AspNetCore.SwaggerUI.dll
+C:\Users\gabri\Desktop\Git\Trabalho-API-web\ApiTarefas\obj\Debug\net8.0\ApiTarefas.csproj.AssemblyReference.cache
+C:\Users\gabri\Desktop\Git\Trabalho-API-web\ApiTarefas\obj\Debug\net8.0\ApiTarefas.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\gabri\Desktop\Git\Trabalho-API-web\ApiTarefas\obj\Debug\net8.0\ApiTarefas.AssemblyInfoInputs.cache
+C:\Users\gabri\Desktop\Git\Trabalho-API-web\ApiTarefas\obj\Debug\net8.0\ApiTarefas.AssemblyInfo.cs
+C:\Users\gabri\Desktop\Git\Trabalho-API-web\ApiTarefas\obj\Debug\net8.0\ApiTarefas.csproj.CoreCompileInputs.cache
+C:\Users\gabri\Desktop\Git\Trabalho-API-web\ApiTarefas\obj\Debug\net8.0\ApiTarefas.MvcApplicationPartsAssemblyInfo.cs
+C:\Users\gabri\Desktop\Git\Trabalho-API-web\ApiTarefas\obj\Debug\net8.0\ApiTarefas.MvcApplicationPartsAssemblyInfo.cache
+C:\Users\gabri\Desktop\Git\Trabalho-API-web\ApiTarefas\obj\Debug\net8.0\ApiTarefas.sourcelink.json
+C:\Users\gabri\Desktop\Git\Trabalho-API-web\ApiTarefas\obj\Debug\net8.0\scopedcss\bundle\ApiTarefas.styles.css
+C:\Users\gabri\Desktop\Git\Trabalho-API-web\ApiTarefas\obj\Debug\net8.0\staticwebassets.build.json
+C:\Users\gabri\Desktop\Git\Trabalho-API-web\ApiTarefas\obj\Debug\net8.0\staticwebassets.development.json
+C:\Users\gabri\Desktop\Git\Trabalho-API-web\ApiTarefas\obj\Debug\net8.0\staticwebassets.build.endpoints.json
+C:\Users\gabri\Desktop\Git\Trabalho-API-web\ApiTarefas\obj\Debug\net8.0\staticwebassets\msbuild.ApiTarefas.Microsoft.AspNetCore.StaticWebAssets.props
+C:\Users\gabri\Desktop\Git\Trabalho-API-web\ApiTarefas\obj\Debug\net8.0\staticwebassets\msbuild.ApiTarefas.Microsoft.AspNetCore.StaticWebAssetEndpoints.props
+C:\Users\gabri\Desktop\Git\Trabalho-API-web\ApiTarefas\obj\Debug\net8.0\staticwebassets\msbuild.build.ApiTarefas.props
+C:\Users\gabri\Desktop\Git\Trabalho-API-web\ApiTarefas\obj\Debug\net8.0\staticwebassets\msbuild.buildMultiTargeting.ApiTarefas.props
+C:\Users\gabri\Desktop\Git\Trabalho-API-web\ApiTarefas\obj\Debug\net8.0\staticwebassets\msbuild.buildTransitive.ApiTarefas.props
+C:\Users\gabri\Desktop\Git\Trabalho-API-web\ApiTarefas\obj\Debug\net8.0\staticwebassets.pack.json
+C:\Users\gabri\Desktop\Git\Trabalho-API-web\ApiTarefas\obj\Debug\net8.0\ApiTarefas.csproj.Up2Date
+C:\Users\gabri\Desktop\Git\Trabalho-API-web\ApiTarefas\obj\Debug\net8.0\ApiTarefas.dll
+C:\Users\gabri\Desktop\Git\Trabalho-API-web\ApiTarefas\obj\Debug\net8.0\refint\ApiTarefas.dll
+C:\Users\gabri\Desktop\Git\Trabalho-API-web\ApiTarefas\obj\Debug\net8.0\ApiTarefas.pdb
+C:\Users\gabri\Desktop\Git\Trabalho-API-web\ApiTarefas\obj\Debug\net8.0\ApiTarefas.genruntimeconfig.cache
+C:\Users\gabri\Desktop\Git\Trabalho-API-web\ApiTarefas\obj\Debug\net8.0\ref\ApiTarefas.dll
