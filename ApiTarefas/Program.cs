@@ -1,9 +1,11 @@
+// Implementação de bibliotecas
 using Microsoft.EntityFrameworkCore;
 using System.ComponentModel.DataAnnotations;
 
+// Criação do builder da aplicação
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
+// Configuração do Swagger para documentação da API
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
@@ -11,74 +13,61 @@ builder.Services.AddSwaggerGen();
 builder.Services.AddDbContext<AppDbContext>(options =>
     options.UseSqlite("Data Source=tarefas.db"));
 
+// Construção da aplicação
 var app = builder.Build();
 
-// Configure the HTTP request pipeline.
+// Habilita Swagger apenas em ambiente de desenvolvimento
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
     app.UseSwaggerUI();
 }
 
-app.UseHttpsRedirection();
 
-// Middleware para tratar erros globalmente
-app.Use(async (context, next) =>
-{
-    try
-    {
-        await next(context);
-    }
-    catch (ValidationException ex)
-    {
-        context.Response.StatusCode = 400;
-        await context.Response.WriteAsJsonAsync(new { error = ex.Message });
-    }
-    catch (Exception ex)
-    {
-        context.Response.StatusCode = 500;
-        await context.Response.WriteAsJsonAsync(new { error = "Ocorreu um erro interno" });
-    }
-});
-
-// Cria o banco de dados e aplica as migrações (apenas para desenvolvimento)
+// Criação do banco de dados 
 using (var scope = app.Services.CreateScope())
 {
     var dbContext = scope.ServiceProvider.GetRequiredService<AppDbContext>();
     dbContext.Database.EnsureCreated();
 }
 
-// Rotas da API com validações
+// Endpoint POST para criar nova tarefa
 app.MapPost("/api/tarefas", async (Tarefa tarefa, AppDbContext db) =>
 {
-    // Validação manual antes de processar
+    // Validação manual do título
     if (string.IsNullOrWhiteSpace(tarefa.Titulo))
     {
-        throw new ValidationException("O título é obrigatório");
+        throw new Exception("O título é obrigatório"); // Agora lança Exception
     }
 
     if (tarefa.Titulo.Length < 3 || tarefa.Titulo.Length > 100)
     {
-        throw new ValidationException("O título deve ter entre 3 e 100 caracteres");
+        throw new Exception("O título deve ter entre 3 e 100 caracteres");
     }
 
     if (!string.IsNullOrEmpty(tarefa.Descricao) && tarefa.Descricao.Length > 500)
     {
-        throw new ValidationException("A descrição não pode exceder 500 caracteres");
+        throw new Exception("A descrição não pode exceder 500 caracteres");
     }
 
-    tarefa.Id = 0; // Para garantir que será gerado novo ID
+    // Configuração da nova tarefa
+    tarefa.Id = 0;
     tarefa.DataCriacao = DateTime.Now;
     
+    // Persistência no banco
     db.Tarefas.Add(tarefa);
     await db.SaveChangesAsync();
     
     return Results.Created($"/api/tarefas/{tarefa.Id}", tarefa);
 });
 
+//WWWWWWWW
+
+// Endpoint GET para listar todas as tarefas
 app.MapGet("/api/tarefas", async (AppDbContext db) => 
     await db.Tarefas.ToListAsync());
 
+// Endpoint GET para obter uma tarefa específica
 app.MapGet("/api/tarefas/{id}", async (int id, AppDbContext db) =>
 {
     if (id <= 0)
@@ -91,6 +80,7 @@ app.MapGet("/api/tarefas/{id}", async (int id, AppDbContext db) =>
         : Results.NotFound();
 });
 
+// Endpoint PUT para atualizar uma tarefa
 app.MapPut("/api/tarefas/{id}", async (int id, Tarefa inputTarefa, AppDbContext db) =>
 {
     if (id <= 0)
@@ -98,7 +88,6 @@ app.MapPut("/api/tarefas/{id}", async (int id, Tarefa inputTarefa, AppDbContext 
         return Results.BadRequest("ID deve ser maior que zero");
     }
 
-    // Validação dos dados de entrada
     if (string.IsNullOrWhiteSpace(inputTarefa.Titulo))
     {
         return Results.BadRequest("O título é obrigatório");
@@ -126,6 +115,10 @@ app.MapPut("/api/tarefas/{id}", async (int id, Tarefa inputTarefa, AppDbContext 
     return Results.NoContent();
 });
 
+
+// MMMMMMM
+
+// Endpoint DELETE para remover uma tarefa
 app.MapDelete("/api/tarefas/{id}", async (int id, AppDbContext db) =>
 {
     if (id <= 0)
@@ -143,9 +136,10 @@ app.MapDelete("/api/tarefas/{id}", async (int id, AppDbContext db) =>
     return Results.NotFound();
 });
 
+// Inicia a aplicação
 app.Run();
 
-// Classe de modelo Tarefa com anotações de validação
+// Modelo de dados para Tarefa
 public class Tarefa
 {
     public int Id { get; set; }
@@ -162,7 +156,7 @@ public class Tarefa
     public DateTime DataCriacao { get; set; }
 }
 
-// Classe de contexto do banco de dados
+// Contexto do banco de dados
 public class AppDbContext : DbContext
 {
     public AppDbContext(DbContextOptions<AppDbContext> options) : base(options) { }
@@ -173,7 +167,6 @@ public class AppDbContext : DbContext
     {
         modelBuilder.Entity<Tarefa>().ToTable("Tarefas");
         
-        // Configurações adicionais de validação no banco
         modelBuilder.Entity<Tarefa>(entity =>
         {
             entity.Property(t => t.Titulo).IsRequired();
@@ -182,3 +175,5 @@ public class AppDbContext : DbContext
         });
     }
 }
+/
+//GGGGGGGGGGGGGGGGGG
