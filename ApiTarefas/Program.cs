@@ -146,10 +146,10 @@ public class Tarefa
     
     [Required(ErrorMessage = "O título é obrigatório")]
     [StringLength(100, MinimumLength = 3, ErrorMessage = "O título deve ter entre 3 e 100 caracteres")]
-    public string Titulo { get; set; }
+    public required string Titulo { get; set; }
     
     [StringLength(500, ErrorMessage = "A descrição não pode exceder 500 caracteres")]
-    public string Descricao { get; set; }
+    public string? Descricao { get; set; }
     
     public bool Concluida { get; set; }
     
