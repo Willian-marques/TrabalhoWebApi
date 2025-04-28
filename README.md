@@ -39,7 +39,7 @@ Esta é uma API simples para gerenciamento de tarefas (To-Do List), construída 
    ```
 
 3. **Acesse o Swagger para testar a API**
-   - Acesse `http://localhost:5000/swagger` no navegador.
+   - Acesse o endereço que o o terminal irá fornecer no navegador.
 
 > ⚡ Nota: O banco de dados SQLite (`tarefas.db`) será criado automaticamente na primeira execução.
 
