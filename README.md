@@ -28,8 +28,8 @@ Esta é uma API simples para gerenciamento de tarefas (To-Do List), construída 
 
 1. **Clone o repositório**
    ```bash
-   git clone [https://github.com/seu-usuario/seu-repositorio.git](https://github.com/Willian-marques/Trabalho-API-web.git)
-   cd [seu-repositorio](https://github.com/Willian-marques/Trabalho-API-web.git)
+   git clone https://github.com/Willian-marques/Trabalho-API-web.git
+   cd https://github.com/Willian-marques/Trabalho-API-web.git
    ```
 
 2. **Restaure os pacotes e execute a aplicação**
