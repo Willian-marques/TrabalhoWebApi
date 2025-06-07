@@ -116,8 +116,6 @@ app.MapPut("/api/tarefas/{id}", async (int id, Tarefa inputTarefa, AppDbContext 
 });
 
 
-// MMMMMMM
-
 // Endpoint DELETE para remover uma tarefa
 app.MapDelete("/api/tarefas/{id}", async (int id, AppDbContext db) =>
 {
@@ -175,5 +173,3 @@ public class AppDbContext : DbContext
         });
     }
 }
-
-//GGGGGGGGGGGGGGGGGG
