@@ -1,175 +1,117 @@
-// Implementação de bibliotecas
 using Microsoft.EntityFrameworkCore;
-using System.ComponentModel.DataAnnotations;
+using TarefasApi.Data;
+using TarefasApi.Models;
 
-// Criação do builder da aplicação
 var builder = WebApplication.CreateBuilder(args);
 
-// Configuração do Swagger para documentação da API
-builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
+// CORS 
+//Permissão do Back-End com o Front-End
 
-// Configuração do DbContext com SQLite
+var regraAcessoBack = "regraAcessoBack"; 
+//criando as condições de acesso ao back-end
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy(name: regraAcessoBack,
+                      policy =>
+                      {
+                          policy.WithOrigins("http://localhost:3000") //aqui ele permite que o front-end acesse o back-end, 
+                                                                      // e tem que vir da "3000"
+                                .AllowAnyHeader() // pode exibir qualquer coisa
+                                .AllowAnyMethod(); // pode trazer qualquer metodo
+                      });
+});
+
+
+//  Configurando o banco de dados
 builder.Services.AddDbContext<AppDbContext>(options =>
     options.UseSqlite("Data Source=tarefas.db"));
 
-// Construção da aplicação
 var app = builder.Build();
 
-// Habilita Swagger apenas em ambiente de desenvolvimento
-if (app.Environment.IsDevelopment())
-{
-    app.UseSwagger();
-    app.UseSwaggerUI();
-}
 
 
-// Criação do banco de dados 
-using (var scope = app.Services.CreateScope())
-{
-    var dbContext = scope.ServiceProvider.GetRequiredService<AppDbContext>();
-    dbContext.Database.EnsureCreated();
-}
+// Aplica as regras do CORS
+app.UseCors(regraAcessoBack);
 
 // Endpoint POST para criar nova tarefa
-app.MapPost("/api/tarefas", async (Tarefa tarefa, AppDbContext db) =>
-{
-    // Validação manual do título
-    if (string.IsNullOrWhiteSpace(tarefa.Titulo))
-    {
-        throw new Exception("O título é obrigatório"); // Agora lança Exception
-    }
+        app.MapPost("/api/tarefas", async (Tarefa tarefa, AppDbContext db) => // aqui vai criar a rota e enviar via post para o banco de dados
+        {
+            var erros = tarefa.Validar(); // vai inciar a cadeia de verificação, essa função Validar() os possiveis erros setados
+            if (erros.Any())
+            {
+                return Results.ValidationProblem(new Dictionary<string, string[]> { { "erros", erros.ToArray() } });
+            }
 
-    if (tarefa.Titulo.Length < 3 || tarefa.Titulo.Length > 100)
-    {
-        throw new Exception("O título deve ter entre 3 e 100 caracteres");
-    }
+            //se nao houver erros, vai criar a tarefa
+            tarefa.Id = 0; // aqui vai criar o id da tarefa
+            tarefa.DataCriacao = DateTime.Now; // aqui vai criar a data de criação da tarefa
+            
+            db.Tarefas.Add(tarefa); // aqui vai adicionar a tarefa no banco de dados
+            await db.SaveChangesAsync(); // aqui vai salvar a tarefa no banco de dados
+            
+            return Results.Created($"/api/tarefas/{tarefa.Id}", tarefa); // aqui vai criar a tarefa e enviar a resposta para o front-end
+        });
 
-    if (!string.IsNullOrEmpty(tarefa.Descricao) && tarefa.Descricao.Length > 500)
-    {
-        throw new Exception("A descrição não pode exceder 500 caracteres");
-    }
+        // Endpoint GET para listar todas as tarefas
+        app.MapGet("/api/tarefas", (AppDbContext db) => // aqui vai criar a rota e buscar via Get usando o banco de dados
+            db.Tarefas.ToListAsync()); // aqui vai buscar todas as tarefas no banco de dados e enviar a resposta para o front
 
-    // Configuração da nova tarefa
-    tarefa.Id = 0;
-    tarefa.DataCriacao = DateTime.Now;
+        // Endpoint GET para obter uma tarefa específica
+        app.MapGet("/api/tarefas/{id}", async (int id, AppDbContext db) => // Buscar via ID
+        {
+            if (id <= 0)
+            {
+                return Results.BadRequest("O ID deve ser maior que zero.");
+            }
+            return await db.Tarefas.FindAsync(id) is Tarefa tarefa ? Results.Ok(tarefa) : Results.NotFound();
+        });
+
+        // Endpoint PUT para atualizar uma tarefa
+        app.MapPut("/api/tarefas/{id}", async (int id, Tarefa inputTarefa, AppDbContext db) => // aqui vai criar a rota e atualizar via Put usando o banco de dados
+        {
+            if (id <= 0)
+            {
+                return Results.BadRequest("O ID deve ser maior que zero.");
+            }
+            
+            var tarefa = await db.Tarefas.FindAsync(id); // aqui vai buscar a tarefa no banco de dados
+            if (tarefa is null) return Results.NotFound();
+
+            var erros = inputTarefa.Validar();
+            if (erros.Any())
+            {
+                return Results.ValidationProblem(new Dictionary<string, string[]> { { "erros", erros.ToArray() } });
+            }
+
+            // caso passe pela validação sem entrar, vai atualizar a tarefa
+            tarefa.Titulo = inputTarefa.Titulo;
+            tarefa.Descricao = inputTarefa.Descricao;
+            tarefa.Concluida = inputTarefa.Concluida;
+
+            //aqui salva a tarefa e salva no banco
+            await db.SaveChangesAsync(); 
+            return Results.NoContent();
+        });
+
+        // Endpoint DELETE para remover uma tarefa
+        app.MapDelete("/api/tarefas/{id}", async (int id, AppDbContext db) => // deleta via ID
+        {
+            if (id <= 0)
+            {
+                return Results.BadRequest("O ID deve ser maior que zero.");
+            }
+            
+            if (await db.Tarefas.FindAsync(id) is Tarefa tarefa) // aqui vai buscar a tarefa no banco de dados
+            {
+                db.Tarefas.Remove(tarefa); 
+                await db.SaveChangesAsync(); // vai remover a tarefa e salvar no banco
+                return Results.Ok(tarefa);
+            }
+            
+            return Results.NotFound();
+        });
     
-    // Persistência no banco
-    db.Tarefas.Add(tarefa);
-    await db.SaveChangesAsync();
-    
-    return Results.Created($"/api/tarefas/{tarefa.Id}", tarefa);
-});
 
-//WWWWWWWW
-
-// Endpoint GET para listar todas as tarefas
-app.MapGet("/api/tarefas", async (AppDbContext db) => 
-    await db.Tarefas.ToListAsync());
-
-// Endpoint GET para obter uma tarefa específica
-app.MapGet("/api/tarefas/{id}", async (int id, AppDbContext db) =>
-{
-    if (id <= 0)
-    {
-        return Results.BadRequest("ID deve ser maior que zero");
-    }
-    
-    return await db.Tarefas.FindAsync(id) is Tarefa tarefa 
-        ? Results.Ok(tarefa) 
-        : Results.NotFound();
-});
-
-// Endpoint PUT para atualizar uma tarefa
-app.MapPut("/api/tarefas/{id}", async (int id, Tarefa inputTarefa, AppDbContext db) =>
-{
-    if (id <= 0)
-    {
-        return Results.BadRequest("ID deve ser maior que zero");
-    }
-
-    if (string.IsNullOrWhiteSpace(inputTarefa.Titulo))
-    {
-        return Results.BadRequest("O título é obrigatório");
-    }
-
-    if (inputTarefa.Titulo.Length < 3 || inputTarefa.Titulo.Length > 100)
-    {
-        return Results.BadRequest("O título deve ter entre 3 e 100 caracteres");
-    }
-
-    if (!string.IsNullOrEmpty(inputTarefa.Descricao) && inputTarefa.Descricao.Length > 500)
-    {
-        return Results.BadRequest("A descrição não pode exceder 500 caracteres");
-    }
-
-    var tarefa = await db.Tarefas.FindAsync(id);
-    
-    if (tarefa is null) return Results.NotFound();
-    
-    tarefa.Titulo = inputTarefa.Titulo;
-    tarefa.Descricao = inputTarefa.Descricao;
-    tarefa.Concluida = inputTarefa.Concluida;
-    
-    await db.SaveChangesAsync();
-    return Results.NoContent();
-});
-
-
-// Endpoint DELETE para remover uma tarefa
-app.MapDelete("/api/tarefas/{id}", async (int id, AppDbContext db) =>
-{
-    if (id <= 0)
-    {
-        return Results.BadRequest("ID deve ser maior que zero");
-    }
-
-    if (await db.Tarefas.FindAsync(id) is Tarefa tarefa)
-    {
-        db.Tarefas.Remove(tarefa);
-        await db.SaveChangesAsync();
-        return Results.Ok(tarefa);
-    }
-    
-    return Results.NotFound();
-});
 
 // Inicia a aplicação
 app.Run();
-
-// Modelo de dados para Tarefa
-public class Tarefa
-{
-    public int Id { get; set; }
-    
-    [Required(ErrorMessage = "O título é obrigatório")]
-    [StringLength(100, MinimumLength = 3, ErrorMessage = "O título deve ter entre 3 e 100 caracteres")]
-    public required string Titulo { get; set; }
-    
-    [StringLength(500, ErrorMessage = "A descrição não pode exceder 500 caracteres")]
-    public string? Descricao { get; set; }
-    
-    public bool Concluida { get; set; }
-    
-    public DateTime DataCriacao { get; set; }
-}
-
-// Contexto do banco de dados
-public class AppDbContext : DbContext
-{
-    public AppDbContext(DbContextOptions<AppDbContext> options) : base(options) { }
-    
-    public DbSet<Tarefa> Tarefas { get; set; }
-    
-    protected override void OnModelCreating(ModelBuilder modelBuilder)
-    {
-        modelBuilder.Entity<Tarefa>().ToTable("Tarefas");
-        
-        modelBuilder.Entity<Tarefa>(entity =>
-        {
-            entity.Property(t => t.Titulo).IsRequired();
-            entity.Property(t => t.Titulo).HasMaxLength(100);
-            entity.Property(t => t.Descricao).HasMaxLength(500);
-        });
-    }
-}
