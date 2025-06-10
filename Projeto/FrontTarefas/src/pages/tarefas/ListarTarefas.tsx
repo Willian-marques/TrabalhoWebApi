@@ -80,18 +80,30 @@ function ListarTarefas() {
     }).then((res) => res.ok && buscarTarefas());
   };
   
-  // --- Funções de controlo da UI ---
+  // --- Funções de controle da UI ---
 
-  const handleBusca = (e: React.FormEvent) => {
+  const Busca = (e: React.FormEvent) => {
     e.preventDefault();
     setFiltroAplicado(termoBusca);
   };
 
-  const handleIniciarEdicao = (tarefa: Tarefa) => {
+  const IniciarEdicao = (tarefa: Tarefa) => {
     setErro(null);
     setIdEmEdicao(tarefa.id);
     setTextoEmEdicao(tarefa.titulo);
     setDescricaoEmEdicao(tarefa.descricao || ''); // Define a descrição para edição
   };
+
+  const SalvarEdicao = (tarefa: Tarefa) => {
+     if(!textoEmEdicao.trim()){
+      setErro("O título não pode estar vazio ao editar.");
+      return;
+    }
+    atualizarTarefa({ ...tarefa, titulo: textoEmEdicao, descricao: descricaoEmEdicao });
+    setIdEmEdicao(null);
+    setTextoEmEdicao('');
+    setDescricaoEmEdicao('');
+  };
+
 
 }
