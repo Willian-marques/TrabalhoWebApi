@@ -104,6 +104,17 @@ function ListarTarefas() {
     setTextoEmEdicao('');
     setDescricaoEmEdicao('');
   };
+  const MudarStatus = (tarefa: Tarefa) => {
+    atualizarTarefa({ ...tarefa, concluida: !tarefa.concluida });
+  };
 
+  return (
+    <div>
+
+
+    </div>
+  )
 
 }
+
+export default ListarTarefas;
