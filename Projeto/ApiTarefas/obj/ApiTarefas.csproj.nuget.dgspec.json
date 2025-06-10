@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\willi\\Desktop\\Trabalho-API-web\\ApiTarefas\\ApiTarefas.csproj": {}
+    "C:\\Users\\gabri\\Desktop\\Trabalho C#\\TrabalhoWebApi\\Projeto\\ApiTarefas\\ApiTarefas.csproj": {}
   },
   "projects": {
-    "C:\\Users\\willi\\Desktop\\Trabalho-API-web\\ApiTarefas\\ApiTarefas.csproj": {
+    "C:\\Users\\gabri\\Desktop\\Trabalho C#\\TrabalhoWebApi\\Projeto\\ApiTarefas\\ApiTarefas.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\willi\\Desktop\\Trabalho-API-web\\ApiTarefas\\ApiTarefas.csproj",
+        "projectUniqueName": "C:\\Users\\gabri\\Desktop\\Trabalho C#\\TrabalhoWebApi\\Projeto\\ApiTarefas\\ApiTarefas.csproj",
         "projectName": "ApiTarefas",
-        "projectPath": "C:\\Users\\willi\\Desktop\\Trabalho-API-web\\ApiTarefas\\ApiTarefas.csproj",
-        "packagesPath": "C:\\Users\\willi\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\willi\\Desktop\\Trabalho-API-web\\ApiTarefas\\obj\\",
+        "projectPath": "C:\\Users\\gabri\\Desktop\\Trabalho C#\\TrabalhoWebApi\\Projeto\\ApiTarefas\\ApiTarefas.csproj",
+        "packagesPath": "C:\\Users\\gabri\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\gabri\\Desktop\\Trabalho C#\\TrabalhoWebApi\\Projeto\\ApiTarefas\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\willi\\AppData\\Roaming\\NuGet\\NuGet.Config"
+          "C:\\Users\\gabri\\AppData\\Roaming\\NuGet\\NuGet.Config"
         ],
         "originalTargetFrameworks": [
           "net8.0"
@@ -37,7 +37,8 @@
           "enableAudit": "true",
           "auditLevel": "low",
           "auditMode": "direct"
-        }
+        },
+        "SdkAnalysisLevel": "9.0.200"
       },
       "frameworks": {
         "net8.0": {
@@ -85,7 +86,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.408/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.203/PortableRuntimeIdentifierGraph.json"
         }
       }
     }
