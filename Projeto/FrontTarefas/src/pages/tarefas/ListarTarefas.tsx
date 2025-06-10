@@ -57,5 +57,22 @@ function ListarTarefas() {
       }
     });
   };
+  const atualizarTarefa = (tarefa: Tarefa) => {
+    fetch(`${API_URL}/api/tarefas/${tarefa.id}`, {
+      method: 'PUT',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(tarefa),
+    }).then(response => {
+      if (response.ok) {
+        setErro(null);
+        buscarTarefas();
+      } else {
+         response.json().then(errorData => {
+          const mensagemErro = errorData.errors?.erros?.[0] || 'Ocorreu um erro ao atualizar a tarefa.';
+          setErro(mensagemErro);
+        });
+      }
+    });
+  };
 
 }
