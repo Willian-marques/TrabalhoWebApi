@@ -79,5 +79,19 @@ function ListarTarefas() {
       method: 'DELETE',
     }).then((res) => res.ok && buscarTarefas());
   };
+  
+  // --- Funções de controlo da UI ---
+
+  const handleBusca = (e: React.FormEvent) => {
+    e.preventDefault();
+    setFiltroAplicado(termoBusca);
+  };
+
+  const handleIniciarEdicao = (tarefa: Tarefa) => {
+    setErro(null);
+    setIdEmEdicao(tarefa.id);
+    setTextoEmEdicao(tarefa.titulo);
+    setDescricaoEmEdicao(tarefa.descricao || ''); // Define a descrição para edição
+  };
 
 }
