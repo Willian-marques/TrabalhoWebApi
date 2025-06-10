@@ -1,3 +1,7 @@
+import React, { useState, useEffect } from 'react';
+// Importa o nosso modelo a partir do caminho correto
+import { Tarefa } from '../../models/Tarefa';
+
 function ListarTarefas() {
   // --- Estados do componente ---
   const [tarefas, setTarefas] = useState<Tarefa[]>([]);
