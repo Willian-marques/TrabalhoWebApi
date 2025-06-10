@@ -74,5 +74,10 @@ function ListarTarefas() {
       }
     });
   };
+   const removerTarefa = (id: number) => {
+    fetch(`${API_URL}/api/tarefas/${id}`, {
+      method: 'DELETE',
+    }).then((res) => res.ok && buscarTarefas());
+  };
 
 }
