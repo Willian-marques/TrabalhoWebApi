@@ -1,70 +1,50 @@
-# Getting Started with Create React App
+### **Instruções para o Front-end (React App)**
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+O front-end é a interface com a qual o utilizador interage.
 
-## Available Scripts
+#### **Pré-requisitos (Front-end)**
 
-In the project directory, you can run:
+* **Node.js e npm:** Necessário para executar o React. Pode descarregar a partir do [site oficial do Node.js](https://nodejs.org/).
 
-### `npm start`
+#### **Passo a Passo (Front-end)**
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+1. Instale as Dependências:  
+   Abra um novo terminal e navegue até à pasta do projeto de front-end (ex: meu-frontend-tarefas).  
+   cd caminho/para/seu/projeto/meu-frontend-tarefas
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+   Execute o comando para instalar as dependências:  
+   npm install
 
-### `npm test`
+2. Configure a Ligação com a API:  
+   Abra o ficheiro src/App.js e encontre a constante API\_URL. Certifique-se de que o valor é exatamente o mesmo endereço do seu back-end.  
+   const API\_URL \= 'http://localhost:5182'; 
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+3. Adicione o Estilo Bootstrap:  
+   Navegue até à pasta public e abra o ficheiro index.html. Dentro da tag \<head\>, adicione a seguinte linha:  
+   \<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"\>
 
-### `npm run build`
+4. Execute o Front-end:  
+   No terminal do front-end, execute:  
+   npm start
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+   Uma nova aba deverá abrir no seu navegador em http://localhost:3000.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+## **📄 Detalhes da API**
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+#### **Estrutura dos Endpoints**
 
-### `npm run eject`
+| Método | Rota | Descrição |
+| :---- | :---- | :---- |
+| POST | /api/tarefas | Criar uma nova tarefa |
+| GET | /api/tarefas | Listar todas as tarefas |
+| GET | /api/tarefas/{id} | Buscar uma tarefa pelo ID |
+| PUT | /api/tarefas/{id} | Atualizar uma tarefa |
+| DELETE | /api/tarefas/{id} | Remover uma tarefa |
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+#### **Exemplo de Objeto Tarefa (JSON)**
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+{  
+  "titulo": "Estudar para a prova",  
+  "descricao": "Revisar capítulos 1 a 5",  
+  "concluida": false  
+}  
