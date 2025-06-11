@@ -109,11 +109,50 @@ function ListarTarefas() {
   };
 
   return (
-    <div>
-      <div> 
-        
+    <div className="cartao-tarefas">
+  <div className="cartao-corpo">
+    <div className="area-botao">
+      <button onClick={buscarTarefas} className="botao atualizar">Atualizar Lista</button>
+    </div>
+
+    <form onSubmit={adicionarTarefa} className="form-adicionar">
+      <div className="campo-grupo">
+        <input
+          type="text"
+          className="campo-entrada"
+          value={novoTitulo}
+          onChange={(e) => setNovoTitulo(e.target.value)}
+          placeholder="Adicionar novo título..."
+        />
+      </div>
+      <div className="campo-grupo">
+        <textarea
+          className="campo-entrada"
+          value={novaDescricao}
+          onChange={(e) => setNovaDescricao(e.target.value)}
+          placeholder="Adicionar descrição (opcional)..."
+          rows={2}
+        ></textarea>
+      </div>
+      <button type="submit" className="botao adicionar">Adicionar Tarefa</button>
+    </form>
+
+    <form onSubmit={Busca} className="form-buscar">
+      <input
+        type="text"
+        className="campo-entrada"
+        placeholder="Buscar título da tarefa..."
+        value={termoBusca}
+        onChange={(e) => setTermoBusca(e.target.value)}
+      />
+      <button type="submit" className="botao buscar">Buscar</button>
+    </form>
+
+    {erro && <div className="caixa-erro" role="alert">{erro}</div>}
       </div>
     </div>
+
+
   )
 
 }
